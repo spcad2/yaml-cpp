@@ -1,0 +1,27 @@
+﻿{
+  "configurations": [
+    {
+      "name": "x64-Debug",
+      "generator": "Visual Studio 15 2017 Win64",
+      "configurationType": "Debug",
+      "buildRoot": "${projectDir}\\out\\build\\${name}",
+      "installRoot": "${projectDir}\\out\\install\\${name}",
+      "cmakeCommandArgs": "-DCMAKE_BUILD_TYPE=Debug -DLOCAL_BUILD=ON",
+      "buildCommandArgs": "-m -v:minimal",
+      "ctestCommandArgs": "-C Debug",
+      "variables": [],
+      "inheritEnvironments": []
+    },
+    {
+      "name": "x64-Release",
+      "generator": "Visual Studio 15 2017 Win64",
+      "configurationType": "Release",
+      "buildRoot": "${projectDir}\\out\\build\\${name}",
+      "installRoot": "${projectDir}\\out\\install\\${name}",
+      "cmakeCommandArgs": "-DCMAKE_BUILD_TYPE=Release -DLOCAL_BUILD=ON",
+      "buildCommandArgs": "-m -v:minimal",
+      "ctestCommandArgs": "-C Release",
+      "variables": []
+    }
+  ]
+}
