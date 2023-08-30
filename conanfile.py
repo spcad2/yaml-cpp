@@ -1,5 +1,6 @@
 import os
 from conan import ConanFile
+from conan.tools.cmake import CMake
 from conan.tools.scm import Git
 from conan.tools.files import load, update_conandata
 
