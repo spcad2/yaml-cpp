@@ -12,7 +12,7 @@ class YamlCppConan(ConanFile):
     homepage = "https://github.com/jbeder/yaml-cpp"
     url = "https://github.com/spcad2/yaml-cpp.git"
     license = "MIT"
-    generators = "cmake"
+    generators = "cmake_find_package"
     settings = "os", "arch", "compiler", "build_type"
     options = {"shared": [True, False]}
     default_options = "shared=False"    
