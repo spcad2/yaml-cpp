@@ -12,7 +12,7 @@ class YamlCppConan(ConanFile):
     homepage = "https://github.com/jbeder/yaml-cpp"
     url = "https://github.com/spcad2/yaml-cpp.git"
     license = "MIT"
-    generators = "cmake_find_package"
+    generators = "cmake"
     settings = "os", "arch", "compiler", "build_type"
 
     def export(self):
@@ -22,7 +22,7 @@ class YamlCppConan(ConanFile):
         update_conandata(self, {"sources": {"commit": scm_commit, "url": scm_url}})
 
     def layout(self):
-        cmake_layout(self)
+        cmake_layout(self, src_folder=".")
 
     def source(self):
         # we recover the saved url and commit from conandata.yml and use them to get sources
