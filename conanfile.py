@@ -14,6 +14,8 @@ class YamlCppConan(ConanFile):
     license = "MIT"
     generators = "cmake"
     settings = "os", "arch", "compiler", "build_type"
+    options = {"shared": [True, False]}
+    default_options = "shared=False"    
 
     def export(self):
         git = Git(self, self.recipe_folder)
