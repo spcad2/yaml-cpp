@@ -1,6 +1,6 @@
 import os
 from conan import ConanFile
-from conan.tools.cmake import CMake
+from conan.tools.cmake import CMake, cmake_layout
 from conan.tools.scm import Git
 from conan.tools.files import load, update_conandata
 
@@ -20,7 +20,7 @@ class YamlCppConan(ConanFile):
         update_conandata(self, {"sources": {"commit": scm_commit, "url": scm_url}})
 
     def layout(self):
-        self.folders.source = "."
+        cmake_layout(self, src_folder=".")        
 
     def source(self):
         # we recover the saved url and commit from conandata.yml and use them to get sources
