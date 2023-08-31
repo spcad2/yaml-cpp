@@ -4,6 +4,7 @@ from conan.tools.cmake import CMake, cmake_layout
 from conan.tools.scm import Git
 from conan.tools.files import load, update_conandata
 
+build_requires = "cmake/3.19.2"
 
 class YamlCppConan(ConanFile):
     name = "yaml-cpp"
