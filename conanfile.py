@@ -36,9 +36,3 @@ class YamlCppConan(ConanFile):
     def build(self):
         # build() will have access to the sources, obtained with the clone in source()
         cmake = CMake(self)
-        cmake.definitions["CONAN_SETTINGS_ARCH"] = self.settings.arch
-        cmake.definitions["CMAKE_BUILD_TYPE"] = self.settings.build_type
-        cmake.definitions["CMAKE_CONFIGURATION_TYPES"] = self.settings.build_type
-        cmake.definitions["CMAKE_SOURCE_FOLDER"] = self.source_folder        
-        cmake.configure()
-        cmake.build()
