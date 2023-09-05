@@ -106,11 +106,17 @@ if (NOT DEFINED CMAKE_CXX_STANDARD)
       CXX_STANDARD 11)
 endif()
 
+if (NOT DEFINED CMAKE_DEBUG_POSTFIX)
+  set(CMAKE_DEBUG_POSTFIX "d")
+endif()
+
 if(YAML_CPP_MAIN_PROJECT)
   target_compile_options(yaml-cpp
     PRIVATE
       $<${not-msvc}:-Wall -Wextra -Wshadow -Weffc++ -Wno-long-long>
-      $<${not-msvc}:-pedantic -pedantic-errors>)
+      $<${not-msvc}:-pedantic -pedantic-errors>
+      $<$<AND:$<NOT:${not-msvc}>,$<CONFIG:RELEASE>>:/Zi>
+      $<$<NOT:${not-msvc}>:/Fd$(OutDir)$(TargetName).pdb>)
 endif()
 
 target_compile_options(yaml-cpp
@@ -137,10 +143,6 @@ target_sources(yaml-cpp
   PRIVATE
     $<$<BOOL:${YAML_CPP_BUILD_CONTRIB}>:${yaml-cpp-contrib-sources}>
     ${yaml-cpp-sources})
-
-if (NOT DEFINED CMAKE_DEBUG_POSTFIX)
-  set(CMAKE_DEBUG_POSTFIX "d")
-endif()
 
 set_target_properties(yaml-cpp PROPERTIES
   VERSION "${PROJECT_VERSION}"
@@ -181,6 +183,9 @@ if (YAML_CPP_INSTALL)
     DESTINATION "${CONFIG_EXPORT_DIR}")
   install(FILES "${PROJECT_BINARY_DIR}/yaml-cpp.pc"
     DESTINATION ${CMAKE_INSTALL_LIBDIR}/pkgconfig)
+  install(FILES
+    "$<TARGET_FILE_DIR:yaml-cpp>/$<TARGET_FILE_BASE_NAME:yaml-cpp>.pdb"
+    DESTINATION "${CMAKE_INSTALL_LIBDIR}")
 endif()
 unset(CONFIG_EXPORT_DIR)
 

@@ -3,11 +3,11 @@ from conan.errors import ConanInvalidConfiguration
 #from conan.tools.build import check_min_cppstd
 from conan.tools.cmake import CMake, CMakeToolchain, cmake_layout
 #from conan.tools.files import apply_conandata_patches, collect_libs, copy, export_conandata_patches, get, rmdir, save
-from conan.tools.files import apply_conandata_patches, get
+from conan.tools.files import apply_conandata_patches, collect_libs, copy, get, rmdir, save
 from conan.tools.microsoft import is_msvc, is_msvc_static_runtime
-#from conan.tools.scm import Version
-#import os
-#import textwrap
+from conan.tools.scm import Version
+import os
+import textwrap
 
 required_conan_version = ">=1.58.0"
 build_requires = "cmake/3.19.2"
@@ -63,8 +63,6 @@ class SupportConan(ConanFile):
     def build(self):
         #apply_conandata_patches(self)
         cmake = CMake(self)
-        self.output.warn("This is a warning, should be yellow")
-
         #the cmake.definitions here should be removed after upgrading to CMake >= 3.15
         cmake.configure()
         cmake.build()
@@ -104,6 +102,7 @@ class SupportConan(ConanFile):
         self.cpp_info.set_property("cmake_target_name", "yaml-cpp")
         self.cpp_info.set_property("pkg_config_name", "yaml-cpp")
         self.cpp_info.libs = collect_libs(self)
+        self.output.warn("This is cpp_info.libs=" + self.cpp_info.libs[0])
         if self.settings.os in ("Linux", "FreeBSD"):
             self.cpp_info.system_libs.append("m")
         if is_msvc(self):
