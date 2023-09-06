@@ -184,7 +184,7 @@ if (YAML_CPP_INSTALL)
   install(FILES "${PROJECT_BINARY_DIR}/yaml-cpp.pc"
     DESTINATION ${CMAKE_INSTALL_LIBDIR}/pkgconfig)
   install(FILES
-    "$<TARGET_FILE_DIR:yaml-cpp>/$<TARGET_FILE_BASE_NAME:yaml-cpp>.pdb"
+    "$<COMPILE_PDB_NAME:yaml-cpp>"
     DESTINATION "${CMAKE_INSTALL_LIBDIR}")
 endif()
 unset(CONFIG_EXPORT_DIR)
